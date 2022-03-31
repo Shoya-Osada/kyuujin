@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework', # 追加
-    'jobs', # 追加
+    'rest_framework', # rest_frameworkを使用できるよう設定
+    'jobs', # jobsアプリケーションを追加
+    'webpack_loader', #webpack_loaderを使用できるよう設定
 ]
 
 MIDDLEWARE = [
@@ -121,7 +123,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+#ページネーションの設定
+#1ページのサイズは４。4つ以上のデータがあれば、ページネーションされる
 REST_FRAMEWORK = {
     'PAGE_SIZE': 4,
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination'
+}
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'dist/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'frontend', 'webpack-stats.json')
+    }
 }

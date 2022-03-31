@@ -1,7 +1,8 @@
 from django.contrib import admin
-from django.urls import path, include # 追加
+from django.urls import path, include 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("api/", include("jobs.api.urls")) # 追加
+    path("api/", include("jobs.api.urls")), 
+    path("", include("jobs.urls")), #トップページのurlを設定
 ]
